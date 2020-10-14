@@ -1,0 +1,14 @@
+name: Test single domain configuration
+
+on:
+    push
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v2
+            -   run: echo 1 | ./project-base/scripts/install.sh
+            -   name: Check running containers
+                run: docker ps -a
