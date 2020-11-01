@@ -1,0 +1,8 @@
+{% if type == 'svg-font' %}
+    <i class="svg svg-{{ name }} {{ attr.class|default('')}}"
+        {% if attr.title|default('') %}title ="{{ attr.title }}"{% endif %}
+        {% for key,value in attr.data|default('') %}
+            data-{{ key }} ="{{ value }}"
+        {% endfor %}
+        ></i>
+{% endif %}
