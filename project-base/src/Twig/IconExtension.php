@@ -40,7 +40,7 @@ class IconExtension extends AbstractExtension
      * @param array $attributes
      * @return string
      */
-    public function renderIcon(string $iconName = '', string $iconType = '', $attributes = array()): string
+    public function renderIcon(string $iconName = '', string $iconType = '', $attributes = []): string
     {
         return $this->twigEnvironment->render(
             'Front/Inline/Icon/icon.html.twig',
