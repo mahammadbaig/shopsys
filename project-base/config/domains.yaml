@@ -8,3 +8,53 @@ domains:
         name: 2.shopsys
         locale: cs
         styles_directory: domain2
+
+    -   id: 3
+        name: 3.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 4
+        name: 4.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 5
+        name: 5.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 6
+        name: 6.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 7
+        name: 7.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 8
+        name: 8.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 9
+        name: 9.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 10
+        name: 10.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 11
+        name: 11.shopsys
+        locale: en
+        styles_directory: common
+
+    -   id: 12
+        name: 12.shopsys
+        locale: en
+        styles_directory: common
