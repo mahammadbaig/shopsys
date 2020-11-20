@@ -25,6 +25,8 @@ class FlagFacadeTest extends TestCase
         $flagDataFactory = new FlagDataFactory($domain);
         $flagDataNew = $flagDataFactory->createFromFlag($flag);
 
+        $flagDataNew->uuid = null;
+
         $this->assertEquals($flagDataOriginal, $flagDataNew);
     }
 
@@ -43,6 +45,8 @@ class FlagFacadeTest extends TestCase
         $domain = $this->createMock(Domain::class);
         $flagDataFactory = new FlagDataFactory($domain);
         $flagDataNew = $flagDataFactory->createFromFlag($flag);
+
+        $flagDataNew->uuid = null;
 
         $this->assertEquals($flagDataEdit, $flagDataNew);
     }
