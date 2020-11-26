@@ -57,6 +57,24 @@ class ParameterFacade
     }
 
     /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
+     */
+    public function getByUuid(string $uuid): Parameter
+    {
+        return $this->parameterRepository->getByUuid($uuid);
+    }
+
+    /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue
+     */
+    public function getParameterValueByUuid(string $uuid): ParameterValue
+    {
+        return $this->parameterRepository->getParameterValueByUuid($uuid);
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
     public function getAll()

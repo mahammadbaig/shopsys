@@ -91,6 +91,36 @@ class ParameterRepository
     }
 
     /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter
+     */
+    public function getByUuid(string $uuid): Parameter
+    {
+        $parameter = $this->getParameterRepository()->findOneBy(['uuid' => $uuid]);
+
+        if ($parameter === null) {
+            throw new ParameterNotFoundException('Parameter with UUID ' . $uuid . ' does not exist.');
+        }
+
+        return $parameter;
+    }
+
+    /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue
+     */
+    public function getParameterValueByUuid(string $uuid): ParameterValue
+    {
+        $parameterValue = $this->getParameterValueRepository()->findOneBy(['uuid' => $uuid]);
+
+        if ($parameterValue === null) {
+            throw new ParameterValueNotFoundException('ParameterValue with UUID ' . $uuid . ' does not exist.');
+        }
+
+        return $parameterValue;
+    }
+
+    /**
      * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
      */
     public function getAll()

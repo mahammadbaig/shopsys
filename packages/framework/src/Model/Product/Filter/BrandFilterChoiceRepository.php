@@ -57,6 +57,19 @@ class BrandFilterChoiceRepository
     }
 
     /**
+     * @param int $domainId
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
+     */
+    public function getBrandFilterChoicesForAll(int $domainId, PricingGroup $pricingGroup): array
+    {
+        $productsQueryBuilder = $this->productRepository
+            ->getAllListableQueryBuilder($domainId, $pricingGroup);
+
+        return $this->getBrandsByProductsQueryBuilder($productsQueryBuilder);
+    }
+
+    /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
      */

@@ -66,6 +66,15 @@ class FlagFacade
     }
 
     /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag
+     */
+    public function getByUuid(string $uuid): Flag
+    {
+        return $this->flagRepository->getByUuid($uuid);
+    }
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag
      */
