@@ -249,3 +249,7 @@ There you can find links to upgrade notes for other versions too.
 
 - added total count to frontend API connections ([#2141](https://github.com/shopsys/shopsys/pull/2141))
     - see #project-base-diff to update your project
+
+- set redis client to cache friendly url slugs ([#2146](https://github.com/shopsys/shopsys/pull/2146))
+    - see #project-base-diff to update your project
+        - you need to define new cache pool `cache.main_friendly_url_slugs` and pass it into `Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory` or its children
