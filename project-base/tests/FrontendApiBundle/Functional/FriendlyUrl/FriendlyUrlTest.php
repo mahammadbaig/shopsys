@@ -80,6 +80,11 @@ class FriendlyUrlTest extends GraphQlTestCase
                 'urlSlug' => 'terms-and-conditions/',
                 'expectedName' => t('Terms and conditions', [], 'dataFixtures', $this->getFirstDomainLocale()),
             ],
+            [
+                'graphQlType' => 'category',
+                'urlSlug' => 'electronics/',
+                'expectedName' => t('Electronics', [], 'dataFixtures', $this->getFirstDomainLocale()),
+            ],
         ];
     }
 
@@ -98,6 +103,11 @@ class FriendlyUrlTest extends GraphQlTestCase
                 'graphQlType' => 'article',
                 'urlSlug' => 'termsAndConditionsNotExist/',
                 'errorMessage' => 'Friendly url not found for route `front_article_detail` by slug `termsAndConditionsNotExist/` on domain `1`',
+            ],
+            [
+                'graphQlType' => 'category',
+                'urlSlug' => 'electronicsNotExist/',
+                'errorMessage' => 'Friendly url not found for route `front_product_list` by slug `electronicsNotExist/` on domain `1`',
             ],
         ];
     }
