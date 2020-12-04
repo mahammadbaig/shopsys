@@ -85,6 +85,11 @@ class FriendlyUrlTest extends GraphQlTestCase
                 'urlSlug' => 'electronics/',
                 'expectedName' => t('Electronics', [], 'dataFixtures', $this->getFirstDomainLocale()),
             ],
+            [
+                'graphQlType' => 'product',
+                'urlSlug' => 'canon-mg3550/',
+                'expectedName' => t('Canon MG3550', [], 'dataFixtures', $this->getFirstDomainLocale()),
+            ],
         ];
     }
 
@@ -108,6 +113,11 @@ class FriendlyUrlTest extends GraphQlTestCase
                 'graphQlType' => 'category',
                 'urlSlug' => 'electronicsNotExist/',
                 'errorMessage' => 'Friendly url not found for route `front_product_list` by slug `electronicsNotExist/` on domain `1`',
+            ],
+            [
+                'graphQlType' => 'product',
+                'urlSlug' => 'canon-mg3550NotExist/',
+                'errorMessage' => 'Friendly url not found for route `front_product_detail` by slug `canon-mg3550NotExist/` on domain `1`',
             ],
         ];
     }
