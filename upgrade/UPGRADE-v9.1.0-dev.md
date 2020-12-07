@@ -249,3 +249,6 @@ There you can find links to upgrade notes for other versions too.
 
 - added total count to frontend API connections ([#2141](https://github.com/shopsys/shopsys/pull/2141))
     - see #project-base-diff to update your project
+
+- add support for finding entity by URL slug to FE API ([#2150](https://github.com/shopsys/shopsys/pull/2150))
+    - see #project-base-diff to update your project
