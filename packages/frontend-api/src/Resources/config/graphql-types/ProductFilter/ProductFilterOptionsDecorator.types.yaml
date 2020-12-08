@@ -1,0 +1,18 @@
+ProductFilterOptionsDecorator:
+    type: interface
+    decorator: true
+    config:
+        description: "Represents a product filter options"
+        fields:
+            minimalPrice:
+                type: "Money!"
+            maximalPrice:
+                type: "Money!"
+            brands:
+                type: "[BrandFilterOption]"
+            flags:
+                type: "[FlagFilterOption]!"
+            inStock:
+                type: "Int!"
+            parameters:
+                type: "[ParameterFilterOption]"

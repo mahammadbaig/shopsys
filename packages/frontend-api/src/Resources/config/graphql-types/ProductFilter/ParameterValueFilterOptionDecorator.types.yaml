@@ -1,0 +1,12 @@
+ParameterValueFilterOptionDecorator:
+    type: input-object
+    decorator: true
+    config:
+        description: "Parameter value filter option"
+        fields:
+            value:
+                type: "ParameterValue!"
+            count:
+                type: "Int!"
+            isAbsolute:
+                type: "Boolean!"

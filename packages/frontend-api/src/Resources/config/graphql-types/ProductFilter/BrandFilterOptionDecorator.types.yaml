@@ -1,0 +1,12 @@
+BrandFilterOptionDecorator:
+    type: input-object
+    decorator: true
+    config:
+        description: "Brand filter option"
+        fields:
+            brand:
+                type: "Brand!"
+            count:
+                type: "Int!"
+            isAbsolute:
+                type: "Boolean!"

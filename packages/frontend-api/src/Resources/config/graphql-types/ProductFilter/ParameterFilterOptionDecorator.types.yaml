@@ -1,0 +1,10 @@
+ParameterFilterOptionDecorator:
+    type: input-object
+    decorator: true
+    config:
+        description: "Parameter filter option"
+        fields:
+            parameter:
+                type: "Parameter!"
+            values:
+                type: "[ParameterValueFilterOption]!"

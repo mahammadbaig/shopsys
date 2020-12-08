@@ -1,0 +1,12 @@
+FlagFilterOptionDecorator:
+    type: input-object
+    decorator: true
+    config:
+        description: "Flag filter option"
+        fields:
+            flag:
+                type: "Flag!"
+            count:
+                type: "Int!"
+            isAbsolute:
+                type: "Boolean!"
