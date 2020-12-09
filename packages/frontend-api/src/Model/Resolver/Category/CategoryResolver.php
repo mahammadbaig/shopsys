@@ -148,7 +148,8 @@ class CategoryResolver implements ResolverInterface, AliasedInterface
     public static function getAliases(): array
     {
         return [
-            'resolveByUuidOrUrlSlug' => 'resolveByUuidOrUrlSlug',
+            'resolver' => 'category',
+            'resolveByUuidOrUrlSlug' => 'categoryByUuidOrUrlSlug',
         ];
     }
 

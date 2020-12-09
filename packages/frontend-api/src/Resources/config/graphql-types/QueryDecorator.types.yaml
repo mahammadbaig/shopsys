@@ -32,7 +32,7 @@ QueryDecorator:
                 type: 'Variant'
             category:
                 type: 'Category'
-                resolve: "@=resolver('resolveByUuidOrUrlSlug', [args['uuid'], args['urlSlug']])"
+                resolve: "@=resolver('categoryByUuidOrUrlSlug', [args['uuid'], args['urlSlug']])"
                 args:
                     uuid:
                         type: "Uuid"
