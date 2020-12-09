@@ -107,7 +107,7 @@ class FriendlyUrlTest extends GraphQlTestCase
             [
                 'graphQlType' => 'article',
                 'urlSlug' => 'termsAndConditionsNotExist/',
-                'errorMessage' => 'Friendly url not found for route `front_article_detail` by slug `termsAndConditionsNotExist/` on domain `1`',
+                'errorMessage' => 'Article with URL slug `termsAndConditionsNotExist/` does not exist.',
             ],
             [
                 'graphQlType' => 'category',

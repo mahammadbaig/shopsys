@@ -71,16 +71,12 @@ class ArticleResolver implements ResolverInterface, AliasedInterface
      */
     public function resolver(?string $uuid = null, ?string $urlSlug = null): Article
     {
-        try {
-            if ($uuid !== null) {
-                return $this->getVisibleByDomainIdAndUuid($uuid);
-            }
+        if ($uuid !== null) {
+            return $this->getVisibleByDomainIdAndUuid($uuid);
+        }
 
-            if ($urlSlug !== null) {
-                return $this->getVisibleByDomainIdAndSlug($urlSlug);
-            }
-        } catch (FriendlyUrlNotFoundException | ArticleNotFoundException $articleNotFoundException) {
-            throw new UserError($articleNotFoundException->getMessage());
+        if ($urlSlug !== null) {
+            return $this->getVisibleByDomainIdAndSlug($urlSlug);
         }
 
         throw new UserError('You need to provide argument \'uuid\' or \'urlSlug\'.');
@@ -147,7 +143,11 @@ class ArticleResolver implements ResolverInterface, AliasedInterface
      */
     protected function getVisibleByDomainIdAndUuid(string $uuid): Article
     {
-        return $this->articleFacade->getVisibleByDomainIdAndUuid($this->domain->getId(), $uuid);
+        try {
+            return $this->articleFacade->getVisibleByDomainIdAndUuid($this->domain->getId(), $uuid);
+        } catch (ArticleNotFoundException $articleNotFoundException) {
+            throw new UserError($articleNotFoundException->getMessage());
+        }
     }
 
     /**
@@ -156,12 +156,19 @@ class ArticleResolver implements ResolverInterface, AliasedInterface
      */
     protected function getVisibleByDomainIdAndSlug(string $urlSlug): Article
     {
-        $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
-            $this->domain->getId(),
-            'front_article_detail',
-            $urlSlug
-        );
+        try {
+            $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
+                $this->domain->getId(),
+                'front_article_detail',
+                $urlSlug
+            );
 
-        return $this->articleFacade->getVisibleByDomainIdAndId($this->domain->getId(), $friendlyUrl->getEntityId());
+            return $this->articleFacade->getVisibleByDomainIdAndId(
+                $this->domain->getId(),
+                $friendlyUrl->getEntityId()
+            );
+        } catch (FriendlyUrlNotFoundException | ArticleNotFoundException $articleNotFoundException) {
+            throw new UserError('Article with URL slug `' . $urlSlug . '` does not exist.');
+        }
     }
 }
