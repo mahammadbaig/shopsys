@@ -52,16 +52,12 @@ class ProductDetailResolver implements ResolverInterface, AliasedInterface
      */
     public function resolver(?string $uuid = null, ?string $urlSlug = null): array
     {
-        try {
-            if ($uuid !== null) {
-                return $this->getVisibleProductArrayByUuid($uuid);
-            }
+        if ($uuid !== null) {
+            return $this->getVisibleProductArrayByUuid($uuid);
+        }
 
-            if ($urlSlug !== null) {
-                return $this->getVisibleProductArrayOnDomainBySlug($urlSlug);
-            }
-        } catch (FriendlyUrlNotFoundException | ProductNotFoundException $productNotFoundException) {
-            throw new UserError($productNotFoundException->getMessage());
+        if ($urlSlug !== null) {
+            return $this->getVisibleProductArrayOnDomainBySlug($urlSlug);
         }
 
         throw new UserError('You need to provide argument \'uuid\' or \'urlSlug\'.');
@@ -83,7 +79,11 @@ class ProductDetailResolver implements ResolverInterface, AliasedInterface
      */
     protected function getVisibleProductArrayByUuid(string $uuid): array
     {
-        return $this->productElasticsearchProvider->getVisibleProductArrayByUuid($uuid);
+        try {
+            return $this->productElasticsearchProvider->getVisibleProductArrayByUuid($uuid);
+        } catch (ProductNotFoundException $productNotFoundException) {
+            throw new UserError($productNotFoundException->getMessage());
+        }
     }
 
     /**
@@ -92,12 +92,16 @@ class ProductDetailResolver implements ResolverInterface, AliasedInterface
      */
     protected function getVisibleProductArrayOnDomainBySlug(string $urlSlug): array
     {
-        $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
-            $this->domain->getId(),
-            'front_product_detail',
-            $urlSlug
-        );
+        try {
+            $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
+                $this->domain->getId(),
+                'front_product_detail',
+                $urlSlug
+            );
 
-        return $this->productElasticsearchProvider->getVisibleProductArrayById($friendlyUrl->getEntityId());
+            return $this->productElasticsearchProvider->getVisibleProductArrayById($friendlyUrl->getEntityId());
+        } catch (FriendlyUrlNotFoundException | ProductNotFoundException $productNotFoundException) {
+            throw new UserError('Product with URL slug `' . $urlSlug . '` does not exist.');
+        }
     }
 }

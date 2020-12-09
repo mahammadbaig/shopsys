@@ -117,7 +117,7 @@ class FriendlyUrlTest extends GraphQlTestCase
             [
                 'graphQlType' => 'product',
                 'urlSlug' => 'canon-mg3550NotExist/',
-                'errorMessage' => 'Friendly url not found for route `front_product_detail` by slug `canon-mg3550NotExist/` on domain `1`',
+                'errorMessage' => 'Product with URL slug `canon-mg3550NotExist/` does not exist.',
             ],
         ];
     }
