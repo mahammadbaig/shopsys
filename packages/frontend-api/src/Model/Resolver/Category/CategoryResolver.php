@@ -127,16 +127,12 @@ class CategoryResolver implements ResolverInterface, AliasedInterface
      */
     public function resolveByUuidOrUrlSlug(?string $uuid = null, ?string $urlSlug = null): Category
     {
-        try {
-            if ($uuid !== null) {
-                return $this->getByUuid($uuid);
-            }
+        if ($uuid !== null) {
+            return $this->getByUuid($uuid);
+        }
 
-            if ($urlSlug !== null) {
-                return $this->getVisibleOnDomainAndSlug($urlSlug);
-            }
-        } catch (FriendlyUrlNotFoundException | CategoryNotFoundException $categoryNotFoundException) {
-            throw new UserError($categoryNotFoundException->getMessage());
+        if ($urlSlug !== null) {
+            return $this->getVisibleOnDomainAndSlug($urlSlug);
         }
 
         throw new UserError('You need to provide argument \'uuid\' or \'urlSlug\'.');
@@ -159,7 +155,11 @@ class CategoryResolver implements ResolverInterface, AliasedInterface
      */
     protected function getByUuid(string $uuid): Category
     {
-        return $this->categoryFacade->getByUuid($uuid);
+        try {
+            return $this->categoryFacade->getByUuid($uuid);
+        } catch (CategoryNotFoundException $categoryNotFoundException) {
+            throw new UserError($categoryNotFoundException->getMessage());
+        }
     }
 
     /**
@@ -168,12 +168,16 @@ class CategoryResolver implements ResolverInterface, AliasedInterface
      */
     protected function getVisibleOnDomainAndSlug(string $urlSlug): Category
     {
-        $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
-            $this->domain->getId(),
-            'front_product_list',
-            $urlSlug
-        );
+        try {
+            $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
+                $this->domain->getId(),
+                'front_product_list',
+                $urlSlug
+            );
 
-        return $this->categoryFacade->getVisibleOnDomainById($this->domain->getId(), $friendlyUrl->getEntityId());
+            return $this->categoryFacade->getVisibleOnDomainById($this->domain->getId(), $friendlyUrl->getEntityId());
+        } catch (FriendlyUrlNotFoundException | CategoryNotFoundException $categoryNotFoundException) {
+            throw new UserError('Category with URL slug `' . $urlSlug . '` does not exist.');
+        }
     }
 }

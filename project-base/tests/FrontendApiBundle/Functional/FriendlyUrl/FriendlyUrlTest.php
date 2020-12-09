@@ -112,7 +112,7 @@ class FriendlyUrlTest extends GraphQlTestCase
             [
                 'graphQlType' => 'category',
                 'urlSlug' => 'electronicsNotExist/',
-                'errorMessage' => 'Friendly url not found for route `front_product_list` by slug `electronicsNotExist/` on domain `1`',
+                'errorMessage' => 'Category with URL slug `electronicsNotExist/` does not exist.',
             ],
             [
                 'graphQlType' => 'product',
