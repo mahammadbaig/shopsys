@@ -102,7 +102,7 @@ class FriendlyUrlTest extends GraphQlTestCase
             [
                 'graphQlType' => 'brand',
                 'urlSlug' => 'canonNotExist/',
-                'errorMessage' => 'Friendly url not found for route `front_brand_detail` by slug `canonNotExist/` on domain `1`',
+                'errorMessage' => 'Brand with URL slug `canonNotExist/` does not exist.',
             ],
             [
                 'graphQlType' => 'article',

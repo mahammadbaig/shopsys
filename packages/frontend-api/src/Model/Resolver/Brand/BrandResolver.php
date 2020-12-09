@@ -53,16 +53,12 @@ class BrandResolver implements ResolverInterface, AliasedInterface
      */
     public function resolver(?string $uuid = null, ?string $urlSlug = null): Brand
     {
-        try {
-            if ($uuid !== null) {
-                return $this->getByUuid($uuid);
-            }
+        if ($uuid !== null) {
+            return $this->getByUuid($uuid);
+        }
 
-            if ($urlSlug !== null) {
-                return $this->getByUrlSlug($urlSlug);
-            }
-        } catch (FriendlyUrlNotFoundException | BrandNotFoundException $brandNotFoundException) {
-            throw new UserError($brandNotFoundException->getMessage());
+        if ($urlSlug !== null) {
+            return $this->getByUrlSlug($urlSlug);
         }
 
         throw new UserError('You need to provide argument \'uuid\' or \'urlSlug\'.');
@@ -84,7 +80,11 @@ class BrandResolver implements ResolverInterface, AliasedInterface
      */
     protected function getByUuid(string $uuid): Brand
     {
-        return $this->brandFacade->getByUuid($uuid);
+        try {
+            return $this->brandFacade->getByUuid($uuid);
+        } catch (BrandNotFoundException $brandNotFoundException) {
+            throw new UserError($brandNotFoundException->getMessage());
+        }
     }
 
     /**
@@ -93,12 +93,16 @@ class BrandResolver implements ResolverInterface, AliasedInterface
      */
     protected function getByUrlSlug(string $urlSlug): Brand
     {
-        $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
-            $this->domain->getId(),
-            'front_brand_detail',
-            $urlSlug
-        );
+        try {
+            $friendlyUrl = $this->friendlyUrlFacade->getFriendlyUrlByRouteNameAndSlug(
+                $this->domain->getId(),
+                'front_brand_detail',
+                $urlSlug
+            );
 
-        return $this->brandFacade->getById($friendlyUrl->getEntityId());
+            return $this->brandFacade->getById($friendlyUrl->getEntityId());
+        } catch (FriendlyUrlNotFoundException | BrandNotFoundException $brandNotFoundException) {
+            throw new UserError('Brand with URL slug `' . $urlSlug . '` does not exist.');
+        }
     }
 }
