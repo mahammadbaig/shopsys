@@ -10,7 +10,7 @@ QueryDecorator:
             products:
                 type: "ProductConnection"
                 argsBuilder:
-                    builder: "ProductsArgumentsBuilder"
+                    builder: "PaginatorArgumentsBuilder"
                     config:
                         orderingModeType: 'ProductOrderingModeEnum'
                 resolve: "@=resolver('products', [args])"

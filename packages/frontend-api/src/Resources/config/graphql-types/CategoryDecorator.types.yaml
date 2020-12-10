@@ -30,7 +30,7 @@ CategoryDecorator:
                 type: "ProductConnection"
                 description: "Paginated and ordered products of category"
                 argsBuilder:
-                    builder: "ProductsArgumentsBuilder"
+                    builder: "PaginatorArgumentsBuilder"
                     config:
                         orderingModeType: 'ProductOrderingModeEnum'
                 resolve: '@=service("Shopsys\\FrontendApiBundle\\Model\\Resolver\\Products\\ProductsResolver").resolveByCategory(args, value)'

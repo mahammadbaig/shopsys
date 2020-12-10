@@ -11,5 +11,3 @@ overblog_graphql:
             args:
                 -   alias: "PaginatorArgumentsBuilder"
                     class: Shopsys\FrontendApiBundle\Component\Arguments\PaginatorArgumentsBuilder
-                -   alias: "ProductsArgumentsBuilder"
-                    class: Shopsys\FrontendApiBundle\Model\Product\ProductsArgumentsBuilder
