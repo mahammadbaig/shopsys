@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\FrontendApiBundle\Functional\Product;
 
-use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
+use App\DataFixtures\Demo\CategoryDataFixture;
 use Tests\FrontendApiBundle\Test\GraphQlTestCase;
 
 class ProductsFilteringOptionsTest extends GraphQlTestCase
 {
-    private const CATEGORY_ELECTRONICS_ID = 2;
-
     /**
      * @var string
      */
@@ -25,8 +23,7 @@ class ProductsFilteringOptionsTest extends GraphQlTestCase
 
     public function testGetElectornicsFilterOptions(): void
     {
-        $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
-        $category = $categoryFacade->getById(self::CATEGORY_ELECTRONICS_ID);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
         $query = '
             query {
