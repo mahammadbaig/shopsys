@@ -28,6 +28,16 @@ class ProductFilterDataMapper
     protected ParameterFacade $parameterFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
+     */
+    protected array $parametersByUuid = [];
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
+     */
+    protected array $parameterValuesByUuid = [];
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade $flagFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
@@ -51,41 +61,11 @@ class ProductFilterDataMapper
         $productFilterData = new ProductFilterData();
         $productFilterData->minimalPrice = $frontendApiFilter['minimalPrice'] ?? null;
         $productFilterData->maximalPrice = $frontendApiFilter['maximalPrice'] ?? null;
-        $productFilterData->brands = $this->getBrandsByUuids($frontendApiFilter['brands'] ?? []);
-        $productFilterData->flags = $this->getFlagsByUuids($frontendApiFilter['flags'] ?? []);
+        $productFilterData->brands = isset($frontendApiFilter['brands']) ? $this->brandFacade->getByUuids($frontendApiFilter['brands']) : [];
+        $productFilterData->flags = isset($frontendApiFilter['flags']) ? $this->flagFacade->getByUuids($frontendApiFilter['flags']) : [];
         $productFilterData->parameters = $this->getParametersAndValuesByUuids($frontendApiFilter['parameters'] ?? []);
 
         return $productFilterData;
-    }
-
-    /**
-     * @param string[] $brandUuids
-     * @return \Shopsys\FrameworkBundle\Model\Product\Brand\Brand[]
-     */
-    protected function getBrandsByUuids(array $brandUuids): array
-    {
-        $brands = [];
-
-        foreach ($brandUuids as $brandUuid) {
-            $brands[] = $this->brandFacade->getByUuid($brandUuid);
-        }
-
-        return $brands;
-    }
-
-    /**
-     * @param string[] $flagUuids
-     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
-     */
-    protected function getFlagsByUuids(array $flagUuids): array
-    {
-        $flags = [];
-
-        foreach ($flagUuids as $flagUuid) {
-            $flags[] = $this->flagFacade->getByUuid($flagUuid);
-        }
-
-        return $flags;
     }
 
     /**
@@ -96,13 +76,15 @@ class ProductFilterDataMapper
     {
         $parametersFilterData = [];
 
+        $this->loadParametersAndValuesFromArray($parameterAndValueUuids);
+
         foreach ($parameterAndValueUuids as $parameterAndValueUuid) {
-            $parameter = $this->parameterFacade->getByUuid($parameterAndValueUuid['parameter']);
+            $parameter = $this->parametersByUuid[$parameterAndValueUuid['parameter']];
 
             $parameterValues = [];
 
             foreach ($parameterAndValueUuid['values'] as $parameterValueUuid) {
-                $parameterValues[] = $this->parameterFacade->getParameterValueByUuid($parameterValueUuid);
+                $parameterValues[] = $this->parameterValuesByUuid[$parameterValueUuid];
             }
 
             $parameterFilterData = new ParameterFilterData();
@@ -113,5 +95,25 @@ class ProductFilterDataMapper
         }
 
         return $parametersFilterData;
+    }
+
+    /**
+     * @param array $parameterAndValueUuids
+     */
+    protected function loadParametersAndValuesFromArray(array $parameterAndValueUuids): void
+    {
+        $parameterUuids = [];
+        $parameterValueUuids = [];
+
+        foreach ($parameterAndValueUuids as $parameterAndValueUuid) {
+            $parameterUuids[] = $parameterAndValueUuid['parameter'];
+
+            foreach ($parameterAndValueUuid['values'] as $parameterValueUuid) {
+                $parameterValueUuids[] = $parameterValueUuid;
+            }
+        }
+
+        $this->parametersByUuid = $this->parameterFacade->getParametersByUuids($parameterUuids);
+        $this->parameterValuesByUuid = $this->parameterFacade->getParameterValuesByUuids($parameterValueUuids);
     }
 }

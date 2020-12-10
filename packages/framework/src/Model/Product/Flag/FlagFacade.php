@@ -136,4 +136,13 @@ class FlagFacade
     {
         $this->eventDispatcher->dispatch(new FlagEvent($flag), $eventType);
     }
+
+    /**
+     * @param string[] $uuids
+     * @return \Shopsys\FrameworkBundle\Model\Product\Flag\Flag[]
+     */
+    public function getByUuids(array $uuids): array
+    {
+        return $this->flagRepository->getByUuids($uuids);
+    }
 }

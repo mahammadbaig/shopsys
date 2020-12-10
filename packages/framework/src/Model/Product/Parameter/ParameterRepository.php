@@ -312,4 +312,36 @@ class ParameterRepository
 
         return $productParameterValuesIndexedByProductIdAndParameterName;
     }
+
+    /**
+     * @param string[] $uuids
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
+     */
+    public function getParametersByUuids(array $uuids): array
+    {
+        $parametersByUuid = [];
+        $parameters = $this->getParameterRepository()->findBy(['uuid' => $uuids]);
+
+        foreach ($parameters as $parameter) {
+            $parametersByUuid[$parameter->getUuid()] = $parameter;
+        }
+
+        return $parametersByUuid;
+    }
+
+    /**
+     * @param string[] $uuids
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
+     */
+    public function getParameterValuesByUuids(array $uuids): array
+    {
+        $parameterValuesByUuid = [];
+        $parameterValues = $this->getParameterValueRepository()->findBy(['uuid' => $uuids]);
+
+        foreach ($parameterValues as $parameterValue) {
+            $parameterValuesByUuid[$parameterValue->getUuid()] = $parameterValue;
+        }
+
+        return $parameterValuesByUuid;
+    }
 }

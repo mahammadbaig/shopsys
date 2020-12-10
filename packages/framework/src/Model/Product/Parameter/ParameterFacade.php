@@ -155,4 +155,22 @@ class ParameterFacade
     {
         $this->eventDispatcher->dispatch(new ParameterEvent($parameter), $eventType);
     }
+
+    /**
+     * @param string[] $uuids
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter[]
+     */
+    public function getParametersByUuids(array $uuids): array
+    {
+        return $this->parameterRepository->getParametersByUuids($uuids);
+    }
+
+    /**
+     * @param string[] $uuids
+     * @return \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue[]
+     */
+    public function getParameterValuesByUuids(array $uuids): array
+    {
+        return $this->parameterRepository->getParameterValuesByUuids($uuids);
+    }
 }
