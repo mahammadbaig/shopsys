@@ -25,9 +25,9 @@ class ProductFilterFacade
     protected ProductFilterDataMapper $productFilterDataMapper;
 
     /**
-     * @var \Shopsys\FrontendApiBundle\Model\Product\Filter\ProductFilterValidator
+     * @var \Shopsys\FrontendApiBundle\Model\Product\Filter\ProductFilterNormalizer
      */
-    protected ProductFilterValidator $productFilterValidator;
+    protected ProductFilterNormalizer $productFilterNormalizer;
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfigFactory
@@ -42,17 +42,17 @@ class ProductFilterFacade
     /**
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrontendApiBundle\Model\Product\Filter\ProductFilterDataMapper $productFilterDataMapper
-     * @param \Shopsys\FrontendApiBundle\Model\Product\Filter\ProductFilterValidator $productFilterValidator
+     * @param \Shopsys\FrontendApiBundle\Model\Product\Filter\ProductFilterNormalizer $productFilterNormalizer
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfigFactory $productFilterConfigFactory
      */
     public function __construct(
         Domain $domain,
         ProductFilterDataMapper $productFilterDataMapper,
-        ProductFilterValidator $productFilterValidator,
+        ProductFilterNormalizer $productFilterNormalizer,
         ProductFilterConfigFactory $productFilterConfigFactory
     ) {
         $this->productFilterDataMapper = $productFilterDataMapper;
-        $this->productFilterValidator = $productFilterValidator;
+        $this->productFilterNormalizer = $productFilterNormalizer;
         $this->productFilterConfigFactory = $productFilterConfigFactory;
         $this->domain = $domain;
     }
@@ -127,7 +127,7 @@ class ProductFilterFacade
             $argument['filter']
         );
 
-        $this->productFilterValidator->removeExcessiveFilters($productFilterData, $productFilterConfigClosure());
+        $this->productFilterNormalizer->removeExcessiveFilters($productFilterData, $productFilterConfigClosure());
 
         return $productFilterData;
     }
