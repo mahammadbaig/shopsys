@@ -6,5 +6,7 @@ ParameterFilterOptionDecorator:
         fields:
             parameter:
                 type: "Parameter!"
+                description: "Parameter"
             values:
                 type: "[ParameterValueFilterOption!]!"
+                description: "Filter options of parameter values"
