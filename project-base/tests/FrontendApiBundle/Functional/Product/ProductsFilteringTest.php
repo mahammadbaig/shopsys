@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\FrontendApiBundle\Functional\Product;
 
-use Shopsys\FrameworkBundle\Model\Category\CategoryFacade;
-use Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade;
-use Shopsys\FrameworkBundle\Model\Product\Flag\FlagFacade;
+use App\DataFixtures\Demo\BrandDataFixture;
+use App\DataFixtures\Demo\CategoryDataFixture;
+use App\DataFixtures\Demo\FlagDataFixture;
 use Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade;
 use Tests\FrontendApiBundle\Test\GraphQlTestCase;
 
 class ProductsFilteringTest extends GraphQlTestCase
 {
-    private const BRAND_APPLE_ID = 1;
-    private const FLAG_ACTION_ID = 3;
-    private const CATEGORY_ELECTRONICS_ID = 2;
     private const PARAMETER_NUMBER_OF_BUTTONS_ID = 9;
 
     /**
@@ -31,8 +28,7 @@ class ProductsFilteringTest extends GraphQlTestCase
 
     public function testFilterByBrand(): void
     {
-        $brandFacade = $this->getContainer()->get(BrandFacade::class);
-        $brand = $brandFacade->getById(self::BRAND_APPLE_ID);
+        $brand = $this->getReference(BrandDataFixture::BRAND_APPLE);
 
         $query = '
             query {
@@ -55,8 +51,7 @@ class ProductsFilteringTest extends GraphQlTestCase
 
     public function testFilterByFlag(): void
     {
-        $flagFacade = $this->getContainer()->get(FlagFacade::class);
-        $flag = $flagFacade->getById(self::FLAG_ACTION_ID);
+        $flag = $this->getReference(FlagDataFixture::FLAG_ACTION_PRODUCT);
 
         $query = '
             query {
@@ -130,8 +125,7 @@ class ProductsFilteringTest extends GraphQlTestCase
 
     public function testFilterByParameter(): void
     {
-        $categoryFacade = $this->getContainer()->get(CategoryFacade::class);
-        $category = $categoryFacade->getById(self::CATEGORY_ELECTRONICS_ID);
+        $category = $this->getReference(CategoryDataFixture::CATEGORY_ELECTRONICS);
 
         $parameterFacade = $this->getContainer()->get(ParameterFacade::class);
         $parameter = $parameterFacade->getById(self::PARAMETER_NUMBER_OF_BUTTONS_ID);
