@@ -14,7 +14,7 @@ class ProductFilterValidator
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
      * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
      */
-    public function removeExcessiveFilters(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig)
+    public function removeExcessiveFilters(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
     {
         $this->removeExcessiveBrands($productFilterData, $productFilterConfig);
         $this->removeExcessiveFlags($productFilterData, $productFilterConfig);
