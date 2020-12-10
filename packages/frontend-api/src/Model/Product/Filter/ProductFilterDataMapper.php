@@ -32,8 +32,11 @@ class ProductFilterDataMapper
      * @param \Shopsys\FrameworkBundle\Model\Product\Brand\BrandFacade $brandFacade
      * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
      */
-    public function __construct(FlagFacade $flagFacade, BrandFacade $brandFacade, ParameterFacade $parameterFacade)
-    {
+    public function __construct(
+        FlagFacade $flagFacade,
+        BrandFacade $brandFacade,
+        ParameterFacade $parameterFacade
+    ) {
         $this->flagFacade = $flagFacade;
         $this->brandFacade = $brandFacade;
         $this->parameterFacade = $parameterFacade;
