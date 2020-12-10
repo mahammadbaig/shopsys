@@ -7,4 +7,4 @@ ParameterFilterOptionDecorator:
             parameter:
                 type: "Parameter!"
             values:
-                type: "[ParameterValueFilterOption]!"
+                type: "[ParameterValueFilterOption!]!"

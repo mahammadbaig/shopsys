@@ -7,4 +7,4 @@ ParameterFilterDecorator:
             parameter:
                 type: "Uuid"
             values:
-                type: "[Uuid]"
+                type: "[Uuid!]"

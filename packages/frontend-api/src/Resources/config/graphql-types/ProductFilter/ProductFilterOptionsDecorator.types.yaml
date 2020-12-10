@@ -9,10 +9,10 @@ ProductFilterOptionsDecorator:
             maximalPrice:
                 type: "Money!"
             brands:
-                type: "[BrandFilterOption]"
+                type: "[BrandFilterOption!]"
             flags:
-                type: "[FlagFilterOption]!"
+                type: "[FlagFilterOption!]"
             inStock:
                 type: "Int!"
             parameters:
-                type: "[ParameterFilterOption]"
+                type: "[ParameterFilterOption!]"
