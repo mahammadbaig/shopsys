@@ -279,7 +279,7 @@ class ProductFilterOptionsFactory
             $parameterValueFilterOptions = [];
 
             foreach ($parameterFilterChoice->getValues() as $parameterValue) {
-                $parameterValueCount = $productFilterCountData->countByParameterIdAndValueId[$parameter->getId()][$parameterValue->getId()] ?? 0;
+                $parameterValueCount = $this->getParameterValueCount($parameter, $parameterValue, $productFilterData, $productFilterCountData);
                 $parameterValueFilterOptions[] = $this->createParameterValueFilterOption(
                     $parameterValue,
                     $parameterValueCount,
@@ -308,5 +308,46 @@ class ProductFilterOptionsFactory
         }
 
         return false;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue $parameterValue
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @return bool
+     */
+    protected function isParameterValueFiltered(Parameter $parameter, ParameterValue $parameterValue, ProductFilterData $productFilterData): bool
+    {
+        foreach ($productFilterData->parameters as $parameterFilterData) {
+            if ($parameterFilterData->parameter === $parameter) {
+                foreach ($parameterFilterData->values as $filteredParameterValue) {
+                    if ($filteredParameterValue === $parameterValue) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\Parameter $parameter
+     * @param \Shopsys\FrameworkBundle\Model\Product\Parameter\ParameterValue $parameterValue
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterCountData $productFilterCountData
+     * @return int
+     */
+    protected function getParameterValueCount(
+        Parameter $parameter,
+        ParameterValue $parameterValue,
+        ProductFilterData $productFilterData,
+        ProductFilterCountData $productFilterCountData
+    ): int {
+        if ($this->isParameterValueFiltered($parameter, $parameterValue, $productFilterData)) {
+            return 0;
+        }
+
+        return $productFilterCountData->countByParameterIdAndValueId[$parameter->getId()][$parameterValue->getId()] ?? 0;
     }
 }
