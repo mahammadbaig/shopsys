@@ -61,8 +61,12 @@ class ProductFilterDataMapper
         $productFilterData = new ProductFilterData();
         $productFilterData->minimalPrice = $frontendApiFilter['minimalPrice'] ?? null;
         $productFilterData->maximalPrice = $frontendApiFilter['maximalPrice'] ?? null;
-        $productFilterData->brands = isset($frontendApiFilter['brands']) ? $this->brandFacade->getByUuids($frontendApiFilter['brands']) : [];
-        $productFilterData->flags = isset($frontendApiFilter['flags']) ? $this->flagFacade->getByUuids($frontendApiFilter['flags']) : [];
+        $productFilterData->brands = isset($frontendApiFilter['brands']) ? $this->brandFacade->getByUuids(
+            $frontendApiFilter['brands']
+        ) : [];
+        $productFilterData->flags = isset($frontendApiFilter['flags']) ? $this->flagFacade->getByUuids(
+            $frontendApiFilter['flags']
+        ) : [];
         $productFilterData->parameters = $this->getParametersAndValuesByUuids($frontendApiFilter['parameters'] ?? []);
 
         return $productFilterData;
