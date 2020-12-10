@@ -279,7 +279,7 @@ class ProductFilterOptionsFactory
             $parameterValueFilterOptions = [];
 
             foreach ($parameterFilterChoice->getValues() as $parameterValue) {
-                $parameterValueCount = $productFilterCountData->countByParameterIdAndValueId[$parameter->getId()][$parameterValue->getId()];
+                $parameterValueCount = $productFilterCountData->countByParameterIdAndValueId[$parameter->getId()][$parameterValue->getId()] ?? 0;
                 $parameterValueFilterOptions[] = $this->createParameterValueFilterOption(
                     $parameterValue,
                     $parameterValueCount,
