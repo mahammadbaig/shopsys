@@ -5,8 +5,8 @@ ParameterFilterDecorator:
         description: "Represents a parameter filter"
         fields:
             parameter:
-                type: "Uuid"
+                type: "Uuid!"
                 description: "Uuid of filtered parameter"
             values:
-                type: "[Uuid!]"
+                type: "[Uuid!]!"
                 description: "Array of uuids filtered parameter values"
