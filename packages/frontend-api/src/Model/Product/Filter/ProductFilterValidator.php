@@ -16,18 +16,53 @@ class ProductFilterValidator
      */
     public function removeExcessiveFilters(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig)
     {
+        $this->removeExcessiveBrands($productFilterData, $productFilterConfig);
+        $this->removeExcessiveFlags($productFilterData, $productFilterConfig);
+        $this->removeExcessiveParametersAndValues($productFilterData, $productFilterConfig);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     */
+    protected function removeExcessiveBrands(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
+    {
         foreach ($productFilterData->brands as $key => $brand) {
             if (!in_array($brand, $productFilterConfig->getBrandChoices(), true)) {
                 unset($productFilterData->brands[$key]);
             }
         }
+    }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     */
+    protected function removeExcessiveFlags(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
+    {
         foreach ($productFilterData->flags as $key => $flag) {
             if (!in_array($flag, $productFilterConfig->getFlagChoices(), true)) {
                 unset($productFilterData->flags[$key]);
             }
         }
+    }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     */
+    protected function removeExcessiveParametersAndValues(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
+    {
+        $this->removeExcessiveParameters($productFilterData, $productFilterConfig);
+        $this->removeExcessiveParameterValues($productFilterData, $productFilterConfig);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     */
+    protected function removeExcessiveParameters(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
+    {
         $parameters = $this->getAllParametersFromParameterFilterData($productFilterData->parameters);
         $parametersFromFilterConfig = $this->getAllParametersFromParameterFilterChoices(
             $productFilterConfig->getParameterChoices()
@@ -38,7 +73,14 @@ class ProductFilterValidator
                 unset($productFilterData->parameters[$key]);
             }
         }
+    }
 
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterData $productFilterData
+     * @param \Shopsys\FrameworkBundle\Model\Product\Filter\ProductFilterConfig $productFilterConfig
+     */
+    protected function removeExcessiveParameterValues(ProductFilterData $productFilterData, ProductFilterConfig $productFilterConfig): void
+    {
         $parameterValuesByParameterId = $this->getAllParameterValuesByParameterIdFromParameterFilterData(
             $productFilterData->parameters
         );
