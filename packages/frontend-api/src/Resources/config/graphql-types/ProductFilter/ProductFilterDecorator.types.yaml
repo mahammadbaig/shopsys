@@ -11,14 +11,14 @@ ProductFilterDecorator:
                 type: "Money"
                 description: "Maximal price filter"
             brands:
-                type: "[Uuid]"
+                type: "[Uuid!]"
                 description: "Array of uuids of brands filter"
             flags:
-                type: "[Uuid]"
+                type: "[Uuid!]"
                 description: "Array of uuids of flags filter"
             inStock:
                 type: "Boolean"
                 description: "In stock filter"
             parameters:
-                type: "[ParameterFilter]"
+                type: "[ParameterFilter!]"
                 description: "Parameter filter"
