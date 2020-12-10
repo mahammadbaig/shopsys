@@ -27,4 +27,28 @@ class ParameterFilterOption
         $this->parameter = $parameter;
         $this->values = $values;
     }
+
+    /**
+     * @return string
+     */
+    public function getUuid(): string
+    {
+        return $this->parameter->getUuid();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->parameter->getName();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisible(): bool
+    {
+        return $this->parameter->isVisible();
+    }
 }

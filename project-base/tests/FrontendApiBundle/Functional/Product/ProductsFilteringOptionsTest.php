@@ -48,13 +48,9 @@ class ProductsFilteringOptionsTest extends GraphQlTestCase
                             minimalPrice,
                             maximalPrice,
                             parameters {
-                                parameter {
-                                    name
-                                }
+                                name
                                 values {
-                                    value {
-                                        text
-                                    }
+                                    text
                                     count
                                     isAbsolute
                                 }
@@ -124,162 +120,120 @@ class ProductsFilteringOptionsTest extends GraphQlTestCase
                     "maximalPrice": "' . $maximalPrice . '",
                     "parameters": [
                         {
-                            "parameter": {
-                                "name": "' . t('Ergonomics', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Ergonomics', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t(
+                                    "text": "' . t(
             'Right-handed',
             [],
             'dataFixtures',
             $this->firstDomainLocale
-        ) . '"
-                                    },
+        ) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Gaming mouse', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Gaming mouse', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('HDMI', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('HDMI', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('No', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('No', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 2,
                                     "isAbsolute": true
                                 },
                                 {
-                                    "value": {
-                                        "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Number of buttons', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Number of buttons', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('5', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('5', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Resolution', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Resolution', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t(
+                                    "text": "' . t(
             '1920×1080 (Full HD)',
             [],
             'dataFixtures',
             $this->firstDomainLocale
-        ) . '"
-                                    },
+        ) . '",
                                     "count": 3,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Screen size', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Screen size', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('27\"', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('27\"', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 },
                                 {
-                                    "value": {
-                                        "text": "' . t('30\"', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('30\"', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 },
                                 {
-                                    "value": {
-                                        "text": "' . t('47\"', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('47\"', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Supported OS', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Supported OS', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t(
+                                    "text": "' . t(
             'Windows 2000/XP/Vista/7',
             [],
             'dataFixtures',
             $this->firstDomainLocale
-        ) . '"
-                                    },
+        ) . '",
                                     "count": 1,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('Technology', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('Technology', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('LED', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('LED', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 3,
                                     "isAbsolute": true
                                 }
                             ]
                         },
                         {
-                            "parameter": {
-                                "name": "' . t('USB', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                            },
+                            "name": "' . t('USB', [], 'dataFixtures', $this->firstDomainLocale) . '",
                             "values": [
                                 {
-                                    "value": {
-                                        "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '"
-                                    },
+                                    "text": "' . t('Yes', [], 'dataFixtures', $this->firstDomainLocale) . '",
                                     "count": 3,
                                     "isAbsolute": true
                                 }

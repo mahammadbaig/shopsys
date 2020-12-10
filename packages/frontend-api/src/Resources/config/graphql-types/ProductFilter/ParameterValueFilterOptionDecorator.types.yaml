@@ -4,8 +4,11 @@ ParameterValueFilterOptionDecorator:
     config:
         description: "Parameter value filter option"
         fields:
-            value:
-                type: "ParameterValue!"
+            uuid:
+                type: "Uuid!"
+                description: "UUID"
+            text:
+                type: "String!"
                 description: "Parameter value"
             count:
                 type: "Int!"

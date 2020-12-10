@@ -34,4 +34,20 @@ class ParameterValueFilterOption
         $this->count = $count;
         $this->isAbsolute = $isAbsolute;
     }
+
+    /**
+     * @return string
+     */
+    public function getUuid(): string
+    {
+        return $this->value->getUuid();
+    }
+
+    /**
+     * @return string
+     */
+    public function getText(): string
+    {
+        return $this->value->getText();
+    }
 }
